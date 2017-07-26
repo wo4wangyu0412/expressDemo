@@ -1,0 +1,37 @@
+table {
+    width: 80%;
+    text-align: left;
+    margin: 20px auto;
+    // border: 1px solid gray;
+    // table-layout: fixed;
+
+    thead {
+        tr {
+            background-color: #f5f7fa;
+            border-bottom: 1px solid #ebf0f5;
+
+            th {
+                position: relative;
+                vertical-align: middle;
+                padding-right: 0;
+                box-sizing: border-box;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border-top: 1px solid #ebf0f5;
+
+            td {
+                position: relative;
+                vertical-align: middle;
+                padding-right: 0;
+                box-sizing: border-box;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

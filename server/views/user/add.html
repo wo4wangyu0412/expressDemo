@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>信息录入</title>
+    <% if (env === "production") { %>
+        <link rel="stylesheet" href="/page1/index.css">
+    <% } %>
+</head>
+<body>
+    <h1>后台管理系统</h1>
+    <h2>新人录入</h2>
+    <table>
+        <form name="form" method="post" action="/add/info">
+            <tr>
+                <td>编号：</td>
+                <td>
+                    <input type="text" name="id">
+                </td>
+            </tr>
+            <tr>
+                <td>姓名：</td>
+                <td>
+                    <input type="text" name="name">
+                </td>
+            </tr>
+            <tr>
+                <td>年龄：</td>
+                <td>
+                    <input type="text" name="age">
+                </td>
+            </tr>
+            <tr>
+                <td>性别：</td>
+                <td>
+                    <label for="y">男：</label>
+                    <input type="radio" id="y" name="sex" value="y" checked="checked">
+                    <label for="x" >女：</label>
+                    <input type="radio" name="sex" value="x" id="x">
+                </td>
+            </tr>
+            <tr>
+                <td>星座：</td>
+                <td>
+                    <input type="text" name="star">
+                </td>
+            </tr>
+            <tr>
+                <td>证件类型</td>
+                <td>
+                    <label for="y">学生证：</label>
+                    <input type="radio" name="paper" value="student" checked="checked" id="student">
+                    <label for="identity">身份证：</label>
+                    <input type="radio" name="paper" value="identity" id="identity">
+                </td>
+            </tr>
+            <tr>
+                <td>证件号码</td>
+                <td><input type="input" name="cardNum"></td>
+            </tr>
+            <tr>
+                <td>证件照片</td>
+                <td>
+                    <input type="file" name="" class="page-pic">
+                    <span class="addNewPic">添加一个</span>
+                </td>
+            </tr>
+            <tr>
+                <td>所在地：</td>
+                <td>国家：</td>
+                <td>
+                    <input type="input" name="contry">
+                </td>
+                <td>省份</td>
+                <td>
+                    <input type="input" name="province">
+                </td>
+                <td>城市</td>
+                <td>
+                    <input type="input" name="city">
+                </td>
+            </tr>
+            <tr>
+                <td>意向城市：</td>
+                <td>
+                    <input type="input" name="wantCity">
+                </td>
+            </tr>
+            <tr>
+                <td>自我介绍</td>
+                <td>
+                    <textarea name="intro"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <input type="submit" value="submit"/>
+            </tr>
+        </form>
+    </table>
+    <script src="/user/add/bundle.js"></script>
+    <% if (env !== "production" && reload === true) { %>
+        <script src="/reload/reload.js"></script>
+    <% } %>
+</body>
+</html>

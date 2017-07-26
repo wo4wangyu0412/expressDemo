@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>信息录入</title>
+    <% if (env === "production") { %>
+        <link rel="stylesheet" href="/user/list.css">
+    <% } %>
+</head>
+<body>
+    <h1>后台管理系统</h1>
+    <h2>会员列表</h2>
+    <% if (result.length) {%>
+        <table>
+        <thead>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>所属地区</th>
+            <th>星座</th>
+            <th>证件类型</th>
+            <th>证件号码</th>
+            <th>意向城市</th>
+            <th>操作</th>
+        </thead>
+        <% for (let i = 0; i < result.length; i++) { %>
+            <tr>
+                <td><%= result[i].id %></td>
+                <td><%= result[i].name %></td>
+                <td>
+                    <% if (result[i].sex === 'x') { %>
+                        女
+                    <% } else { %>
+                        男
+                    <% } %>
+                </td>
+                <td><%= result[i].age %></td>
+                <td><%= result[i].area %></td>
+                <td><%= result[i].star %></td>
+                <td>
+                    <% if (result[i].paper == 1) { %>
+                        学生证
+                    <% } else { %>
+                        身份证
+                    <% } %>
+                </td>
+                <td><%= result[i].cardNum %></td>
+                <td><%= result[i].want %></td>
+                <td>
+                    <p class="delete-btn" id="<%= result[i]._id %>">删除</p>
+                </td>
+            </tr>
+        <% } %>
+        </table>
+    <%} else {%>
+            <p>列表暂时为空 <a href="/user/add">立即添加</a></p>
+    <% }%>
+    <script src="/user/list/bundle.js"></script>
+    <% if (env !== "production" && reload === true) { %>
+        <script src="/reload/reload.js"></script>
+    <% } %>
+</body>
+</html>

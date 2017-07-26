@@ -1,7 +1,6 @@
-var express = require('express');
-var path = require('path');
-var consolidate = require('consolidate');
-var open = require('./server/data/open');
+var express = require('express'),
+    path = require('path'),
+    consolidate = require('consolidate');
 
 var isDev = process.env.NODE_ENV !== 'production';
 var app = express();
@@ -11,13 +10,10 @@ app.engine('html', consolidate.ejs);
 app.set('view engine', 'html');
 app.set('views', path.resolve(__dirname, './server/views'));
 
-// local variables for all views
 app.locals.env = process.env.NODE_ENV || 'dev';
-app.locals.reload = true;
+app.locals.reload = false;
 
 if (isDev) {
-
-    // static assets served by webpack-dev-middleware & webpack-hot-middleware for development
     var webpack = require('webpack'),
         webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
@@ -25,10 +21,7 @@ if (isDev) {
 
     var compiler = webpack(webpackDevConfig);
 
-    // attach to the compiler & the server
     app.use(webpackDevMiddleware(compiler, {
-
-        // public path should be the same with webpack config
         publicPath: webpackDevConfig.output.publicPath,
         noInfo: true,
         stats: {
@@ -39,19 +32,21 @@ if (isDev) {
 
     require('./server/routes')(app);
 
-    // add "reload" to express, see: https://www.npmjs.com/package/reload
-    var reload = require('reload');
-    var http = require('http');
-
-    var server = http.createServer(app);
-    reload(server, app);
-
-    server.listen(port, function(){
-        console.log('App (dev) is now running on port 3000!');
+    // browsersync is a nice choice when modifying only views (with their css & js)
+    var bs = require('browser-sync').create();
+    app.listen(port, function(){
+        bs.init({
+            open: false,
+            ui: false,
+            notify: false,
+            proxy: 'localhost:3000',
+            files: ['./server/views/**'],
+            port: 8080
+        });
+        console.log('App (dev) is going to be running on port 8080 (by browsersync).');
     });
-} else {
 
-    // static assets served by express.static() for production
+} else {
     app.use(express.static(path.join(__dirname, 'public')));
     require('./server/routes')(app);
     app.listen(port, function () {

@@ -7,15 +7,17 @@ $('form').submit(function(e) {
     var imgs = [];
     var reader = new FileReader();
 
-    $('#page-pic').each(function() {
+    $('.page-pic').each(function() {
         if (this.files.length) {
             reader.readAsDataURL(this.files[0]);
         }
     });
 
+    $('.addNewPic').on('click', function() {
+    });
+
     reader.onload = function(e) {
         imgs.push(this.result);
-
         if (imgs.length === $('.page-pic').length) {
             pushData();
         }
@@ -58,9 +60,8 @@ $('form').submit(function(e) {
         // });
 
         var dataStr = JSON.stringify(data);
-        debugger
         var successFn = function(e) {
-            console.log('push success');
+            // window.location.reload();
         };
 
         $.ajax({

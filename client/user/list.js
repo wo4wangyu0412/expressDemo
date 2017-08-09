@@ -29,7 +29,7 @@ $('.delete-btn').on('click', function(e) {
             contentType: 'application/json;charset=utf-8',
             data: dataStr,
             success: function() {
-                alert('删除成功');
+                window.location.reload();
             }
         });
     }

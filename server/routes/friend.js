@@ -1,10 +1,13 @@
+var util = require('../util/util');
 var express = require('express');
 var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json({limit: '50mb'});
 var mongoose = require('mongoose');
-var personModel = mongoose.model('Person');
+var personModel = mongoose.model('people');
+var http = require('http');
+var friendController = require('../../server/controllers/friend');
 
 var mongoose = require('mongoose');
 var db = mongoose.connection;
@@ -16,5 +19,29 @@ router.get('/friend/header', (req, res) => {
 
     res.send(friendDemo);
 });
+
+/**
+ * 登录操作
+ */
+router.post('/friend/login', jsonParser, (req, res) => {
+    var code = req.body.code;
+
+    if (code) {
+        friendController.login(code, res);
+    }
+});
+
+router.post('/friend/checkout', jsonParser, (req, res) => {
+
+    if (req.body.code) {
+        friendController.checkCode(req.body, function (data) {
+            res.send(util.unifyRes({
+                result: data
+            }));
+        }, res);
+    }
+})
+
+
 
 module.exports = router;

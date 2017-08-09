@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var consolidate = require('consolidate');
-var open = require('./server/data/open');
+var open = require('./server/models/open');
 
 var isDev = process.env.NODE_ENV !== 'production';
 var app = express();
@@ -24,6 +24,7 @@ if (isDev) {
         webpackDevConfig = require('./webpack.config.js');
 
     var compiler = webpack(webpackDevConfig);
+
 
     // attach to the compiler & the server
     app.use(webpackDevMiddleware(compiler, {

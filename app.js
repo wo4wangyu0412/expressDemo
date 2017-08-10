@@ -47,7 +47,7 @@ if (isDev) {
     var server = http.createServer(app);
     reload(server, app);
 
-    server.listen(port, function(){
+    server.listen(port, '0.0.0.0', function(){
         console.log('App (dev) is now running on port 3000!');
     });
 } else {

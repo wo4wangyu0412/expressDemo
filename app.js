@@ -53,7 +53,7 @@ if (isDev) {
 } else {
 
     // static assets served by express.static() for production
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'dist')));
     require('./server/routes')(app);
     app.listen(port, function () {
         console.log('App (production) is now running on port 3000!');

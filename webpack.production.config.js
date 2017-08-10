@@ -4,12 +4,13 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 var productionConfig = [{
     entry: {
-        user: './client/user',
+        'user/add': './client/user/add/',
+        'user/list': './client/user/list/',
         page2: './client/page2'
     },
     output: {
         filename: './[name]/bundle.js',
-        path: path.resolve(__dirname, './public'),
+        path: path.resolve(__dirname, './dist'),
         publicPath: '/'
     },
     module: {

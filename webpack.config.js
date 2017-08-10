@@ -6,13 +6,13 @@ var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
 var devConfig = {
     entry: {
-        'user/add': ['./client/user/add.js', hotMiddlewareScript],
-        'user/list': ['./client/user/list.js', hotMiddlewareScript],
+        'user/add': ['./client/user/add/', hotMiddlewareScript],
+        'user/list': ['./client/user/list/', hotMiddlewareScript],
         page2: ['./client/page2', hotMiddlewareScript]
     },
     output: {
         filename: './[name]/bundle.js',
-        path: path.resolve(__dirname, './public'),
+        path: path.resolve(__dirname, './dist'),
         publicPath: publicPath
     },
     devtool: 'eval-source-map',

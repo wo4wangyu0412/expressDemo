@@ -4,9 +4,11 @@ var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json({limit: '50mb'});
+var fileParser = bodyParser({uploadDir:'./uploads'});
 var mongoose = require('mongoose');
 var personModel = mongoose.model('people');
 var http = require('http');
+var upload = require('../models/fileuploads');
 var friendController = require('../../server/controllers/friend');
 
 var mongoose = require('mongoose');
@@ -40,7 +42,21 @@ router.post('/friend/checkout', jsonParser, (req, res) => {
             }));
         }, res);
     }
-})
+});
+var cpUpload = upload.fields([{ name: 'pic', maxCount: 10 }]);
+
+router.post('/firend/pushPic', fileParser, (req, res) => {
+    res.send(req.files);
+    console.log(req.files);
+    res.end();
+    if (req.body.code) {
+        friendController.checkCode(req.body, function (data) {
+            res.send(util.unifyRes({
+                result: data
+            }));
+        }, res);
+    }
+});
 
 
 
